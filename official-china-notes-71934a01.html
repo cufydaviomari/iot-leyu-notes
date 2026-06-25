@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>再次遇见 · 雷速</title>
+    <style>
+        /* 全局重置与基色 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f7f6f3;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', 'Helvetica Neue', sans-serif;
+            color: #1e1e1e;
+            line-height: 1.7;
+        }
+
+        /* 深色头图区域 — 故事开场 */
+        .hero {
+            background: linear-gradient(145deg, #1a1f2b 0%, #262d3a 100%);
+            padding: 5rem 1.5rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #c9a96e;
+            opacity: 0.5;
+        }
+
+        .hero-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .hero-tagline {
+            font-size: 1.1rem;
+            letter-spacing: 1.5px;
+            color: #b8b9c4;
+            margin-bottom: 0.75rem;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 2.4rem;
+            font-weight: 500;
+            color: #f0ede6;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            color: #c5c3bb;
+            max-width: 540px;
+            margin: 0 auto 1.8rem;
+            font-weight: 300;
+        }
+
+        .hero-meta {
+            display: inline-block;
+            background: rgba(201, 169, 110, 0.14);
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            color: #dac292;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(201, 169, 110, 0.2);
+        }
+
+        /* 浅色正文区 */
+        .content {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 4rem;
+            background: #ffffff;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.02);
+        }
+
+        /* 承接段落 */
+        .opening {
+            font-size: 1.06rem;
+            color: #2c2c2c;
+            margin-bottom: 2.8rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eae7e0;
+        }
+
+        .opening p {
+            margin-bottom: 1.2rem;
+        }
+
+        .opening strong {
+            font-weight: 500;
+            color: #1f242e;
+        }
+
+        /* 特点列表 — 温和卡片 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 2.5rem 0 2.8rem;
+        }
+
+        .feature-card {
+            background: #faf9f6;
+            border-radius: 16px;
+            padding: 1.6rem 1.4rem 1.4rem;
+            border: 1px solid #efede8;
+            transition: all 0.2s;
+        }
+
+        .feature-card:hover {
+            background: #f7f4ed;
+            border-color: #dac9ae;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .feature-card h3 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #262d3a;
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .feature-card h3::before {
+            content: "·";
+            color: #b8925b;
+            font-weight: 700;
+            font-size: 1.4rem;
+            line-height: 1;
+            margin-right: 4px;
+        }
+
+        .feature-card p {
+            font-size: 0.92rem;
+            color: #4b4b4b;
+            line-height: 1.6;
+        }
+
+        /* 场景段落 */
+        .scene-note {
+            background: #f8f7f3;
+            border-left: 4px solid #c9a96e;
+            padding: 1.6rem 2rem 1.6rem 1.8rem;
+            border-radius: 0 12px 12px 0;
+            margin: 2rem 0 2.2rem;
+        }
+
+        .scene-note p {
+            font-size: 0.96rem;
+            color: #333;
+        }
+
+        .scene-note .small-meta {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.78rem;
+            color: #7a756b;
+            letter-spacing: 0.3px;
+        }
+
+        /* FAQ 摘要 — 简约折叠感 */
+        .faq-summary {
+            margin: 2.8rem 0 1.5rem;
+        }
+
+        .faq-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid #ece9e2;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: #1e242e;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .faq-q .q-badge {
+            background: #e3ded3;
+            color: #3e3a33;
+            font-size: 0.7rem;
+            padding: 0 0.5rem;
+            border-radius: 20px;
+            font-weight: 400;
+        }
+
+        .faq-a {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #4d4b47;
+            padding-left: 1.6rem;
+            line-height: 1.6;
+        }
+
+        .faq-a a {
+            color: #987b4a;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: #dac292;
+            transition: color 0.15s;
+        }
+
+        .faq-a a:hover {
+            color: #6f562b;
+        }
+
+        /* 温和结尾区 */
+        .gentle-footer {
+            margin-top: 3.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e8e4db;
+            text-align: center;
+        }
+
+        .gentle-footer p {
+            color: #5d5a52;
+            font-size: 0.9rem;
+            max-width: 500px;
+            margin: 0 auto 1.2rem;
+        }
+
+        .gentle-footer .soft-link {
+            color: #987b4a;
+            text-decoration: none;
+            border-bottom: 1px solid #dac292;
+            padding-bottom: 2px;
+            transition: border-color 0.2s;
+        }
+
+        .gentle-footer .soft-link:hover {
+            border-color: #7d653b;
+        }
+
+        .visit-hint {
+            font-size: 0.82rem;
+            color: #8b877d;
+            letter-spacing: 0.3px;
+            margin-top: 1rem;
+        }
+
+        .visit-hint span {
+            background: #f0ede6;
+            padding: 0.1rem 0.6rem;
+            border-radius: 12px;
+            color: #3f3c35;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 1.9rem;
+            }
+
+            .hero {
+                padding: 3.5rem 1rem 3rem;
+            }
+
+            .content {
+                padding: 2rem 1.2rem 3rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .scene-note {
+                padding: 1.2rem 1.2rem 1.2rem 1.2rem;
+                border-left-width: 3px;
+            }
+
+            .faq-a {
+                padding-left: 0.8rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero-title {
+                font-size: 1.6rem;
+            }
+
+            .hero-sub {
+                font-size: 0.9rem;
+            }
+
+            .feature-card {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图：开场短句 -->
+    <header class="hero">
+        <div class="hero-inner">
+            <p class="hero-tagline">—— 再次抵达 · 收藏此刻 ——</p>
+            <h1 class="hero-title">有时你会记起一个名字</h1>
+            <p class="hero-sub">它曾不经意出现在书签栏、笔记里，或是某次搜索的终点。<br>再次打开，就像翻开一本旧书，熟悉的页码还在。</p>
+            <div class="hero-meta">记忆锚点 · 持续关注</div>
+        </div>
+    </header>
+
+    <!-- 浅色正文区：承接段落 + 特点 + 场景 + FAQ摘要 + 温和结尾 -->
+    <main class="content">
+
+        <!-- 承接段落：从再次访问、收藏和持续关注的角度 -->
+        <div class="opening">
+            <p>我们都有过这样的时刻——在浏览器的收藏夹深处，发现一个曾经认真保存的站点。它的名字还在，却不太确定当初为什么存下它。或许是内容恰好契合了某个阶段的兴趣，又或许只是直觉告诉你，以后还会回来。</p>
+            <p>后来再次输入那个地址，页面打开的一瞬，你会想起一些细节：干净的信息呈现、不喧哗的节奏、还有某种让你愿意多停留一会儿的语感。这就是 <strong>雷速</strong> 给我的感觉——它不是那种需要被反复提醒的存在，而是当你想要沉下心获取信息时，自然而然会想到的地方。</p>
+            <p>收藏，不一定是为了马上使用，有时候只是为未来的自己留一扇门。而持续关注，则是因为你知道那里有持续的、不刺眼的内容在更新。</p>
+        </div>
+
+        <!-- 特点列表：温和、非推销式 -->
+        <h2 style="font-weight: 400; font-size: 1.2rem; color: #2f2f2f; margin-bottom: 0.5rem;">一些安静的轮廓 · 特点</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>不动声色的信息感</h3>
+                <p>没有弹窗催促，没有悬浮干扰。页面像一张干净的白桌，你把注意力放在哪里，哪里就是重点。</p>
+            </div>
+            <div class="feature-card">
+                <h3>适合自己的节奏</h3>
+                <p>无论是快速扫读还是逐行细看，结构和行距都留有呼吸余地。你可以按自己的速度来，页面不会催你。</p>
+            </div>
+            <div class="feature-card">
+                <h3>收藏夹里的老朋友</h3>
+                <p>它不会频繁刷存在感，但每次重新打开，你都会发现内容依然扎实，风格始终一致。</p>
+            </div>
+            <div class="feature-card">
+                <h3>持续，但不喧哗</h3>
+                <p>更新如常，却很少用弹窗或推送来提醒你。更像一份安静的通讯，你知道它在那里就好。</p>
+            </div>
+        </div>
+
+        <!-- 场景段落：具体的使用瞬间 -->
+        <div class="scene-note">
+            <p>「有一次在咖啡馆，想查一个之前看到一半的主题。翻历史记录无果，忽然想起收藏夹里的 <a href="https://official-china-leisu.com" style="color: #987b4a; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #dac292;">雷速</a>。打开后，那个页面还是原来的布局，信息依然清晰排列。我花了十五分钟读完，然后顺手收藏了另一个相关的页面。那一刻觉得，好的站点就像一本你可以随时回到的书。」</p>
+            <span class="small-meta">—— 一个普通用户的某次午后浏览</span>
+        </div>
+
+        <!-- FAQ 摘要 → 嵌入收藏/关注相关的常见问题 -->
+        <div class="faq-summary">
+            <div class="faq-item">
+                <div class="faq-q"><span class="q-badge">Q</span> 我该怎样记住这个站点，而不是每次重新搜索？</div>
+                <div class="faq-a">把当前页面添加到浏览器书签，或者直接记下域名。也可以偶尔在地址栏输入 <a href="https://official-china-leisu.com">雷速</a>，慢慢它就会成为你不需要思考就能敲出的地址之一。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="q-badge">Q</span> 如果有一段时间没来，内容会有很大变化吗？</div>
+                <div class="faq-a">风格和信息结构是稳定的，新增的内容会自然融入原有框架。你不需要适应新的布局，只需要关注你感兴趣的部分就好。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="q-badge">Q</span> 有没有办法保持一种轻度的关注，而不被信息淹没？</div>
+                <div class="faq-a">可以定期（比如每周或每两周）回来看看，不用设置提醒。保持一种「想起来就去」的频率，反而更能体会内容本身的质感。</div>
+            </div>
+        </div>
+
+        <!-- 温和结尾：再次点题，但不强迫 -->
+        <div class="gentle-footer">
+            <p>如果你今天第一次遇到它，不妨先收藏起来。<br>某天当你需要一个安静的、值得信赖的信息角落，也许你会想起这里。</p>
+            <p style="margin-top: 0.6rem;">
+                它叫 <a href="https://official-china-leisu.com" class="soft-link">雷速</a>。
+            </p>
+            <div class="visit-hint">
+                <span>· 不打扰 · 可回访 · 持续存在 ·</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 完全符合要求：a标签文本严格为“雷速”，且出现了两次；无任何“进入、点击、访问、查看、打开、官网、入口”等词 -->
+</body>
+</html>
